@@ -27,13 +27,14 @@ if child_pid == 0:
     ws.close()
     # time.sleep(0.1)
 
-if  child_pid != 0:
-    ws.close()
+if  child_pid == 0:
     while True:
         print( pid, '[Before Receive]')
         receive_str = rs.recv(1024)
         print( pid, '[Receive]', '--', receive_str)
         time.sleep(2)
+else:
+    ws.close()
         
 # rs.close()
 
@@ -46,9 +47,9 @@ else:
     os.waitpid(child_pid, 0)
 
 
-# serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# serversocket.bind(('127.0.0.1', 12350))
-# serversocket.listen()
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serversocket.bind(('127.0.0.1', 12350))
+serversocket.listen()
 
 # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # client_socket.connect(('127.0.0.1', 12350))
